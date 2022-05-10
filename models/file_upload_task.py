@@ -4,6 +4,7 @@ from core.models import mixins as core_mixins
 
 class UploadedFileCategory(models.TextChoices):
     MARKDOWNEVENTSCOPE = "MARKDOWNEVENTSCOPE"
+    PRICINGSCENARIOSCOPE = "PRICINGSCENARIOSCOPE"
 
 
 class UploadTaskStatus(models.TextChoices):
@@ -41,6 +42,12 @@ class FileUploadTask(core_mixins.TimeStampMixin, models.Model):
     file_category = models.CharField(
         max_length=100,
         choices=UploadedFileCategory.choices,
+        null=True,
+        blank=True,
+    )
+    pricing_scenario = models.ForeignKey(
+        "core.PricingScenario",
+        on_delete=models.CASCADE,
         null=True,
         blank=True,
     )
